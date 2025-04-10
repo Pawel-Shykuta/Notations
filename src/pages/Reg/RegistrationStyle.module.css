@@ -1,0 +1,51 @@
+
+body{
+    background-color: rgb(226, 223, 223);
+}
+
+.loginWrapper{
+    background-color: white;
+    width: 500px;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: 1px solid silver;
+    border-radius: 20px;
+}
+
+.loginWrapper h1{
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.loginWrapper label{
+    width: 400px;
+    margin-bottom: -15px;
+    color: rgb(105, 104, 104);
+    font-size: 20px;
+}
+
+.loginWrapper .p{
+    color: blue;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.loginWrapper .p:hover{
+    text-decoration: underline;
+}
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
