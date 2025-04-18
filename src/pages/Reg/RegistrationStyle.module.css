@@ -1,9 +1,8 @@
-
-body{
+body {
     background-color: rgb(226, 223, 223);
-}
-
-.loginWrapper{
+  }
+  
+  .loginWrapper {
     background-color: white;
     width: 500px;
     height: 550px;
@@ -11,41 +10,83 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
+
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
     margin: auto;
+
     border: 1px solid silver;
     border-radius: 20px;
-}
-
-.loginWrapper h1{
+    padding: 20px; /* Добавил отступы для улучшенного внешнего вида */
+  }
+  
+  .loginWrapper h1 {
     font-size: 24px;
     font-weight: 400;
-}
-
-.loginWrapper label{
-    width: 400px;
-    margin-bottom: -15px;
+    text-align: center; /* Центрирование заголовка */
+  }
+  
+  .loginWrapper label {
+    width: 80%;
+    margin-bottom: 8px;
     color: rgb(105, 104, 104);
-    font-size: 20px;
-}
-
-.loginWrapper .p{
-    color: blue;
     font-size: 18px;
+    font-weight: 600; /* Подчеркнутый шрифт для меток */
+  }
+  
+  .loginWrapper .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  .loginWrapper .p {
+    color: blue;
+    font-size: 16px;
     cursor: pointer;
-}
-
-.loginWrapper .p:hover{
+    text-align: center;
+  }
+  
+  .loginWrapper .p:hover {
     text-decoration: underline;
-}
-
+  }
+  
+  /* Анимация для загрузки */
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+  }
+  
+  @media (max-width: 768px) {
+    .loginWrapper {
+      width: 80%;
+      height: 500px;
+      padding: 20px;
+      gap: 5px;
+      margin: 20% auto;
+    }
+  
+    .loginWrapper h1 {
+      font-size: 22px;
+    }
+  
+    .loginWrapper label {
+        width: 100%;
+      font-size: 16px;
+    }
+  
+    .loginWrapper .p {
+      font-size: 14px;
+    }
+  
+    input, button {
+      padding: 12px;
+      font-size: 14px;
+      width: 100%;
+    }
   }
   

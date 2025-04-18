@@ -1,60 +1,118 @@
 .Container {
+  position: relative;
+  min-height: 130px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #2c2f38;
+  padding: 20px 30px;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  border-bottom: 1px solid #444;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 8px 8px 0 0;
+  gap: 20px;
+}
+
+.ConSatings {
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #1f1f1f;
-  padding: 15px 30px;
-  color: white;
-  font-family: Arial, sans-serif;
-  border-bottom: 2px solid #333;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 0 0 10px 10px;
 }
 
 .Email {
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.ButtonsContainer {
-  display: flex;
-  gap: 12px;
-}
-
-.ButtonsContainer button {
-  background-color: #ff6347;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.ButtonsContainer button:hover {
-  background-color: #ff4537;
-  transform: scale(1.05);
-}
-
-.ButtonsContainer button:active {
-  transform: scale(1);
+  font-size: 38px;
+  font-weight: 600;
+  color: #e0e0e0;
 }
 
 .Logout {
-  font-size: 16px;
-  font-weight: bold;
-  color: #ff6347;
+  font-size: 36px;
+  font-weight: 600;
+  color: silver;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .Logout:hover {
-  color: #ff4537;
-  transform: scale(1.1);
+  color: #ff4c39;
+  transform: scale(1.05);
   text-decoration: underline;
 }
 
 .Logout:active {
   transform: scale(1);
+}
+
+.ButtonsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ButtonsContainer button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ButtonsContainer button:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.ButtonsContainer button:active {
+  transform: translateY(1px);
+}
+
+/* Адаптация под планшеты */
+@media (max-width: 1024px) {
+  .Email {
+    font-size: 16px;
+  }
+
+  .Logout {
+    font-size: 32px;
+  }
+}
+
+/* Адаптация под телефоны */
+@media (max-width: 600px) {
+  .Container {
+    padding: 16px;
+  }
+
+  .ConSatings {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .Email {
+    font-size: 26px;
+  }
+
+  .Logout {
+    font-size: 30px;
+  }
+
+  .ButtonsContainer {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .ButtonsContainer button {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+  }
 }

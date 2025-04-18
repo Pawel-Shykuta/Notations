@@ -1,0 +1,79 @@
+.ContainerFormForLoockEmail {
+    width: 100%;
+    height: 100vh; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f4f4f4; 
+  }
+  
+  .FormForLoockEmail {
+    background-color: #ffffff;
+    width: 400px;
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .Title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px; 
+    color: #333; 
+    color: rgb(75, 75, 75);
+  }
+  
+  .InputField {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px; 
+    font-size: 18px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .InputField:focus {
+    border-color: #4caf50; 
+    outline: none;
+  }
+  
+  .SubmitButton {
+    width: 90%;
+    padding: 12px;
+    background-color: #4caf50; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .SubmitButton:hover {
+    background-color: #45a049; 
+  }
+  
+  .SubmitButton:active {
+    background-color: #388e3c; 
+  }
+  
+  .sendNewPass{
+    font-size: 18px;
+    color: rgb(41, 41, 41);
+    margin-top: 10px;
+    cursor: pointer;
+  }
+
+  .sendNewPass:hover{
+    color: rgb(36, 36, 193);
+    text-decoration: underline;
+  }
+  .sendNewPass:active{
+    transform: scale(1.01); 
+  }

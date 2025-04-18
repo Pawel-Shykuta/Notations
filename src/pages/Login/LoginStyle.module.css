@@ -1,52 +1,132 @@
-
-body{
-    background-color: rgb(226, 223, 223);
-}
-
-.loginWrapper{
+body {
+    background-color: #f5f5f5; /* Светлый фон для контекста */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .loginWrapper {
     background-color: white;
     width: 500px;
     height: 400px;
+    padding: 30px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    border: 1px solid silver;
-    border-radius: 20px;
-}
-
-.loginWrapper h1{
-    font-size: 24px;
-    font-weight: 400;
-}
-
-.loginWrapper label{
-    width: 400px;
-    margin-bottom: -15px;
-    color: rgb(105, 104, 104);
-    font-size: 19px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 1px solid #e1e1e1;
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+  
+  .loginWrapper:hover {
+    transform: translate(-50%, -50%) scale(1.05); 
+  }
+  
+  .loginWrapper h1 {
+    font-size: 26px;
     font-weight: 600;
-}
-
-.loginWrapper .p{
-    color: blue;
-    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .loginWrapper label {
+    width: 100%;
+    margin-bottom: 5px;
+    margin-left: 20%;
+    color: #666;
+    font-size: 16px;
+    font-weight: 500;
+  }
+  
+  .loginWrapper .p {
+    color: #007bff;
+    font-size: 14px;
     cursor: pointer;
-}
-
-.loginWrapper .p:hover{
+    transition: color 0.3s ease;
+  }
+  
+  .loginWrapper .p:hover {
+    color: #0056b3;
     text-decoration: underline;
-}
-
+  }
+  
+  .loginWrapper .p:active {
+    color: #003d80;
+  }
+  
+  input, button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    color: #333;
+    background-color: #f8f8f8;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+  }
+  
+  input:focus, button:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  button {
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button:active {
+    background-color: #004085;
+  }
+  
+  @media (max-width: 768px) {
+    .loginWrapper {
+      width: 80%;
+      height: 300px;
+      padding: 20px;
+      gap: 0px;
+      margin: 0;
+    }
+  
+    .loginWrapper h1 {
+      font-size: 22px;
+    }
+  
+    .loginWrapper label {
+      margin-left: 10px;
+      font-size: 14px;
+    }
+  
+    .loginWrapper .p {
+      font-size: 12px;
+    }
+  
+    input, button {
+      width: 70%;
+      margin-left: -13px;
+      padding: 10px;
+      font-size: 14px;
+    }
+  }
+  
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
   

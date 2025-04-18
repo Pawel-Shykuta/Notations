@@ -1,0 +1,122 @@
+.ProfileWrapper {
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  background-color: #f5f7fa;
+  min-height: 70vh;
+}
+
+.FormProfile {
+  background-color: #fff;
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0px 1px 2px #333;
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ProfileTitle {
+  font-size: 28px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.ProfileItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  flex-wrap: wrap;
+}
+
+.Label {
+  font-weight: 500;
+  color: #555;
+  flex: 1 1 100%;
+  margin-bottom: 5px;
+}
+
+.Value {
+  margin-left: 0;
+  margin-top: 0;
+  color: #111;
+  flex: 1 1 100%;
+  word-break: break-word;
+}
+
+.Button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  background-color: #4f46e5;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.Button:hover {
+  background-color: #3730a3;
+}
+
+.dellAcc {
+  width: 100%;
+  height: 40px;
+  background-color: rgb(236, 44, 44);
+  color: white;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.dellAcc:hover {
+  background-color: #111;
+  color: red;
+}
+
+/* Мобильная адаптация */
+@media (max-width: 600px) {
+  .FormProfile {
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  .ProfileTitle {
+    font-size: 24px;
+  }
+
+  .ProfileItem {
+    font-size: 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .Value{
+    width: 90%;
+  }
+
+  .Button {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px 0;
+    margin: 0;
+  }
+
+  .dellAcc {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+}

@@ -18,17 +18,18 @@ import styles from './inputStyle.module.css'
         }
         
         
-        return(
-            <div className={styles.INputWrapper}>
-                <input 
-                    className={styles.input}
-                    type={type}  
-                    value={value}
-                    placeholder={placeholder}
-                    onChange={ChangeInput}
-                />
+        return (
+            <div className={styles.inputWrapper}>
+              <input 
+                className={styles.input}
+                type={type}  
+                value={value}
+                placeholder={placeholder}
+                onChange={ChangeInput}
+              />
             </div>
-        )
+          );
+          
     }
 
 

@@ -10,16 +10,16 @@ interface ButtonProps {
 }
 
     const Button: React.FC<ButtonProps> = ({onClick, children, type = "button", disabled}) => {
-        return(
+        return (
             <button 
-                type={type}
-                onClick={onClick}
-                disabled={disabled}
-                className={`${styles.button} ${disabled ? styles.disabled : ""}`}
+              type={type}
+              onClick={onClick}
+              disabled={disabled}
+              className={`${styles.button} ${disabled ? styles.disabled : ""}`}
             >
-                {children}
+              {children}
             </button>
-        )
+          );          
     }
 
 

@@ -1,32 +1,55 @@
 
-import { v4 as uuidv4 } from 'uuid';
 
 const projectId = 'users-279b7';
 const baseUrl = `https://firestore.googleapis.com/v1/projects/${projectId}/databases/(default)/documents`;
 
-// ADD USER
+const API_KEY = 'AIzaSyBqa_VQ2cwrO_UV0A5JNKxscR1dEeOSyTA';
+
+
+
+
 export const addUserWithEmailAsId = async (name: string, email: string, password: string): Promise<boolean> => {
   if (name === '' || email === '' || password === '') {
-    alert('не все поля заполнены!');
+    alert('Не все поля заполнены!');
     return false;
   }
 
   try {
-    const userId = uuidv4(); 
-    const url = `${baseUrl}/SecondUser/${encodeURIComponent(userId)}`;
-    
-    const lists: string[] = []; // Указываем тип для массива lists
+  
+    const authRes = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${API_KEY}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email,
+        password,
+        returnSecureToken: true
+      })
+    });
 
+    const authData = await authRes.json();
+    console.log('Ответ от Firebase Auth:', authData); 
+
+    if (!authRes.ok) {
+      console.error('Ошибка регистрации:', authData.error.message);
+      throw new Error(authData.error.message);
+    }
+
+    const userId = authData.localId;
+    console.log('Получен ID пользователя:', userId);
+
+
+    const url = `${baseUrl}/SecondUser/${encodeURIComponent(userId)}`;
     const data = {
       fields: {
         id: { stringValue: userId },
         name: { stringValue: name },
         email: { stringValue: email },
-        password: { stringValue: password },
-        lists: { arrayValue: { values: lists.map(list => ({ stringValue: list })) } }, // Использование массива
+        lists: { arrayValue: { values: [] } }
       }
     };
-    
+
+    console.log('Отправка данных в Firestore:', data); 
+
 
     const res = await fetch(url, {
       method: 'PATCH',
@@ -36,65 +59,128 @@ export const addUserWithEmailAsId = async (name: string, email: string, password
 
     if (!res.ok) {
       const errText = await res.text();
+      console.error('Ошибка при записи в Firestore:', errText);
       throw new Error(errText);
     }
 
-    alert('Пользователь добавлен успешно!');
-    console.log('Пользователь добавлен успешно!');
+    console.log('Пользователь зарегистрирован!');
     return true;
+
   } catch (error) {
-    console.log(error);
+    console.log('Ошибка при регистрации:', error);
+    alert('Ошибка при регистрации');
+    return false;
+  }
+};
+
+
+export const fetchUsersFromFirestore = async (input: string, password: string): Promise<boolean> => {
+  try {
+    const trimmedInput = input.trim();
+
+    let emailToUse = '';
+    
+    if (validateEmail(trimmedInput)) {
+      emailToUse = trimmedInput;
+    } else {
+
+      const res = await fetch(`${baseUrl}/SecondUser`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json' }
+      });
+
+      if (!res.ok) {
+        throw new Error('Ошибка получения данных пользователей');
+      }
+
+      const data = await res.json();
+
+      const foundUser = data.documents?.find(
+        (user: any) => user.fields.name?.stringValue.toLowerCase() === trimmedInput.toLowerCase()
+      );
+
+      if (!foundUser) {
+        throw new Error('Пользователь с таким логином не найден');
+      }
+
+      emailToUse = foundUser.fields.email?.stringValue || '';
+    }
+
+
+    const authRes = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${API_KEY}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: emailToUse,
+        password,
+        returnSecureToken: true
+      })
+    });
+
+    const authData = await authRes.json();
+
+    if (!authRes.ok) {
+      throw new Error(authData.error?.message || 'Ошибка авторизации');
+    }
+
+    const userId = authData.localId;
+
+ 
+    const userRes = await fetch(`${baseUrl}/SecondUser/${userId}`, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+
+    if (!userRes.ok) {
+      throw new Error('Ошибка получения данных пользователя');
+    }
+
+    const userData = await userRes.json();
+    const name = userData.fields?.name?.stringValue || '';
+    const emailFromFirestore = userData.fields?.email?.stringValue || '';
+
+    sessionStorage.setItem('idUser', userId);
+    sessionStorage.setItem('name', name);
+    sessionStorage.setItem('email', emailFromFirestore);
+
+   
+    return true;
+
+  } catch (error: any) {
+    console.error('Ошибка авторизации:', error);
+    alert(error.message || 'Ошибка авторизации');
     return false;
   }
 };
 
 
 
-export const fetchUsersFromFirestore = async (email: string, password: string): Promise<boolean> => {
+
+
+const validateEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+
+export const LoockEmailUsers = async (email: string): Promise<boolean> => {
   try {
-    const url = `${baseUrl}/SecondUser`;
-    const res = await fetch(url, {
-      method: "GET",
+    const res = await fetch(`${baseUrl}/SecondUser`, {
+      method: 'GET',
       headers: { 'Content-Type': 'application/json' }
     });
 
     if (!res.ok) {
-      const errText = await res.text();
-      throw new Error(errText);
+      throw new Error('Error fetching users');
     }
 
     const data = await res.json();
 
-    interface UserFields {
-      id:{stringValue:string},
-      name: { stringValue: string };
-      email: { stringValue: string };
-      password: { stringValue: string };
-    }
-
-    interface FirestoreDocument {
-      name: string;
-      fields: UserFields;
-    }
-
-    const userLists = data.documents?.map(({ name, fields }: FirestoreDocument) => ({
-      id: fields.id?.stringValue || '', 
-      name: fields.name?.stringValue || '',
-      email: fields.email?.stringValue || '',
-      password: fields.password?.stringValue || '',
-    })) || [];
-
-    const foundUser = userLists.find((user:any) => 
-      (user.email === email && user.password === password) || 
-      (user.name === email && user.password === password)
+    const loockEmail = data.documents?.find(
+      (user: any) => user.fields.email.stringValue === email
     );
-    console.log(foundUser)
-    if(foundUser){  
-      sessionStorage.setItem('idUser',JSON.stringify(foundUser.id))
-      return true
-    }else{
-      return false
-    }
+
+    return !!loockEmail;
 
   } catch (error) {
     console.log('Error fetching users:', error);

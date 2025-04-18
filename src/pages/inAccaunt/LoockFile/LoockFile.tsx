@@ -72,6 +72,8 @@ const Previe = () => {
       console.error("Ошибка при изменении данных:", error);
     }
   };
+  
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
   const filteredData = dataInfo.filter((item) => {
     const name = item?.mapValue?.fields?.name?.stringValue?.toLowerCase() || "";
@@ -81,7 +83,13 @@ const Previe = () => {
     const importanceMatches = filterImportance ? importance === filterImportance : true;
 
     return nameMatches && importanceMatches;
+  })
+  .sort((a, b) => {
+    const dateA = new Date(a.mapValue.fields.date.stringValue).getTime();
+    const dateB = new Date(b.mapValue.fields.date.stringValue).getTime();
+    return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
   });
+
 
   const DellItem = async (index: number) => {
     try {
@@ -119,6 +127,12 @@ const Previe = () => {
           <option value="medium">Medium</option>
           <option value="low">Low</option>
         </select>
+
+        <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value as 'asc' | 'desc')} className={style.selected}>
+          <option value="asc">Sort by Date ↑</option>
+          <option value="desc">Sort by Date ↓</option>
+        </select>
+
       </div>
       <div className={style.previewContainer}>
         <div className={style.previewContent}>
@@ -129,13 +143,13 @@ const Previe = () => {
                 {filteredData.map((item, index) => {
                   const itemDateString = item.mapValue.fields.date.stringValue;
                   
-                  // Преобразуем строку даты из item в объект Date
+                  
                   const itemDate = new Date(itemDateString);
 
-                  // Рассчитываем разницу в миллисекундах
+                  
                   const timeDifference = todayDateObject.getTime() - itemDate.getTime();
                   
-                  // Переводим разницу в миллисекундах в дни
+                  
                   const daysDifference = Math.floor(timeDifference / (1000 * 3600 * 24));
 
                   return (

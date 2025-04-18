@@ -1,16 +1,47 @@
 .inputWrapper {
+  width: 100%;
+  max-width: 420px;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .input {
-  width: 400px;
-  padding: 10px;
+  width: 100%;
+  padding: 12px 16px;
   font-size: 16px;
+  font-weight: 500;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 8px;
   outline: none;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
 }
 
 .input:focus {
   border-color: #007bff;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15);
+}
+
+/* Placeholder стиль (по желанию) */
+.input::placeholder {
+  color: #aaa;
+  font-weight: 400;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .input {
+    font-size: 15px;
+    padding: 10px 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .input {
+    font-size: 14px;
+    padding: 10px 12px;
+  }
 }
