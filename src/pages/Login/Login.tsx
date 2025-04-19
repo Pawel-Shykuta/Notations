@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from './LoginStyle.module.css';
-
 import { useNavigate } from "react-router-dom";
 import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import Loader from '../../components/Loader/Loader';
-
+import { booleanProps } from '../../App';
 import { fetchUsersFromFirestore } from '../../services/Auntification/Auntification';
 
 export interface User {
@@ -15,15 +14,27 @@ export interface User {
   password: string;
 }
 
-const Login: React.FC = () => {
+const Login: React.FC<booleanProps> = ({ rememberMeBtn, setRememberMeBtn }) => {
   const navigate = useNavigate();
-
   const [loading, setLoading] = useState<boolean>(false);
 
   const [regUser, setRegUser] = useState({
-    email: '',
-    password: '',
+    email: localStorage.getItem("email") || '',
+    password: localStorage.getItem("password") || '',
   });
+
+
+  useEffect(() => {
+    localStorage.setItem("rememberMe", JSON.stringify(rememberMeBtn));
+
+    if (rememberMeBtn) {
+      localStorage.setItem("email", regUser.email);
+      localStorage.setItem("password", regUser.password);
+    } else {
+      localStorage.removeItem("email");
+      localStorage.removeItem("password");
+    }
+  }, [rememberMeBtn, regUser]);
 
   const BottonChange = async () => {
     setLoading(true);  
@@ -67,11 +78,23 @@ const Login: React.FC = () => {
         onChangee={(value) => InputChange('password', value)}
       />
 
+      <div className={styles.remembeMe}>
+        <label htmlFor="remember"> Remember me </label>
+        <input
+          type='checkbox'
+          name="remember"
+          checked={rememberMeBtn}
+          onChange={() => setRememberMeBtn(!rememberMeBtn)}
+        />
+      </div>
+
       <Button onClick={BottonChange}>
         {loading ? <Loader /> : "Login"}
       </Button>
 
-      <p className={styles.p} onClick={() => navigate('/reg')}>Don't have an account? Register</p>
+      <p className={styles.p} onClick={() => navigate('/reg')}>
+        Don't have an account? Register
+      </p>
     </div>
   );
 };

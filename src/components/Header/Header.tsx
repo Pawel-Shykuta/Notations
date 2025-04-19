@@ -5,14 +5,15 @@ import Setings from '../Setings/Setings'
 import { useNavigate } from "react-router-dom";
 
 import {infoUser} from '../../services/loadServices/loadInfoUser'
-
 import { FiSettings } from "react-icons/fi";
 
-interface HeaderProps{
-  loockNewData?:boolean;
+interface HeaderProps {
+  loockNewData?: boolean;
+  setRememberMeBtn?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Header: React.FC<HeaderProps> = ({ loockNewData }) => {
+
+const Header: React.FC<HeaderProps> = ({ loockNewData,setRememberMeBtn}) => {
     const navigate = useNavigate()
     const [email,setEmail] = useState<string | null>(null)
     const [setingsOpen,setSetingsOpen] = useState<boolean>(false)
@@ -43,7 +44,7 @@ const Header: React.FC<HeaderProps> = ({ loockNewData }) => {
           </div>
 
           {setingsOpen?(
-            <Setings/>
+            <Setings setRememberMeBtn={setRememberMeBtn} />
           ): (<div></div>)}
 
           <div className={Styles.ButtonsContainer}>

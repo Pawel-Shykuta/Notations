@@ -6,7 +6,7 @@ body {
   .loginWrapper {
     background-color: white;
     width: 500px;
-    height: 400px;
+    height: 450px;
     padding: 30px 40px;
     display: flex;
     flex-direction: column;
@@ -90,11 +90,29 @@ body {
   button:active {
     background-color: #004085;
   }
+
+  .remembeMe{
+    display: flex;
+    width: 40%;
+    margin-top: -30px;
+    margin-left: -10%;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .remembeMe input{
+    border: none;
+    width: 40px;
+    height: 40px;
+    margin-left: -30px;
+    cursor: pointer;
+  }
+
   
   @media (max-width: 768px) {
     .loginWrapper {
       width: 80%;
-      height: 300px;
+      height: 350px;
       padding: 20px;
       gap: 0px;
       margin: 0;
@@ -119,6 +137,15 @@ body {
       padding: 10px;
       font-size: 14px;
     }
+  }
+
+
+  .remembeMe input{
+    border: none;
+    width: 20px;
+    height: 20px;
+    margin-top: 10px;
+    cursor: pointer;
   }
   
   @keyframes spin {

@@ -3,7 +3,7 @@ import style from './YourProfileStyle.module.css';
 import { infoUser } from '../../services/loadServices/loadInfoUser';
 import Header from '../../components/Header/Header';
 import {ChangeUserData} from '../../services/ChangeInfoUser/ChangeInfoUser'
-
+import {booleanProps} from'../../App'
 
 interface UserData {
   email: { stringValue: string } | string;
@@ -17,7 +17,9 @@ interface EditableUserData {
   id:string;
 }
 
-const YourProfile = () => {
+
+
+const YourProfile: React.FC<booleanProps> = ({setRememberMeBtn}) => {
   const [data, setData] = useState<UserData | null>(null);
   const [ChangeteUserValue, setChangeUserValue] = useState<boolean>(false);
   const [formData, setFormData] = useState<EditableUserData>({ email: '',  name: '',id:'' });
@@ -77,7 +79,7 @@ const YourProfile = () => {
 
   return (
     <>
-      <Header loockNewData={loockNewData} />
+      <Header loockNewData={loockNewData} setRememberMeBtn={setRememberMeBtn} />
       <div className={style.ProfileWrapper}>
         <div className={style.FormProfile}>
           <h1 className={style.ProfileTitle}>Your Profile</h1>
