@@ -24,9 +24,8 @@ const Login: React.FC<booleanProps> = ({ rememberMeBtn, setRememberMeBtn }) => {
   });
 
 
-  useEffect(() => {
-    localStorage.setItem("rememberMe", JSON.stringify(rememberMeBtn));
 
+  useEffect(() => {
     if (rememberMeBtn) {
       localStorage.setItem("email", regUser.email);
       localStorage.setItem("password", regUser.password);
@@ -36,12 +35,14 @@ const Login: React.FC<booleanProps> = ({ rememberMeBtn, setRememberMeBtn }) => {
     }
   }, [rememberMeBtn, regUser]);
 
+
+
+
   const BottonChange = async () => {
     setLoading(true);  
     const isAuthenticated = await fetchUsersFromFirestore(regUser.email, regUser.password);
 
     if (isAuthenticated) {
-      alert('Login successful');
       navigate('/LoockFile');
     } else {
       if (regUser.email === '' || regUser.password === '') {
@@ -49,7 +50,6 @@ const Login: React.FC<booleanProps> = ({ rememberMeBtn, setRememberMeBtn }) => {
         setLoading(false);
         return;
       }
-      alert('Incorrect credentials!');
     }
     setLoading(false);
   };

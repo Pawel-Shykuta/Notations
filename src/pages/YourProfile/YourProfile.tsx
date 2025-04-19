@@ -5,6 +5,10 @@ import Header from '../../components/Header/Header';
 import {ChangeUserData} from '../../services/ChangeInfoUser/ChangeInfoUser'
 import {booleanProps} from'../../App'
 
+import Swal from 'sweetalert2';
+import {AscUser} from '../../components/AskWindow/AskWindow'
+
+
 interface UserData {
   email: { stringValue: string } | string;
   name: { stringValue: string } | string;
@@ -24,6 +28,7 @@ const YourProfile: React.FC<booleanProps> = ({setRememberMeBtn}) => {
   const [ChangeteUserValue, setChangeUserValue] = useState<boolean>(false);
   const [formData, setFormData] = useState<EditableUserData>({ email: '',  name: '',id:'' });
   const[loockNewData,setLoockNewData] = useState<boolean>(true)
+  
 
   useEffect(() => {
     const takeEmail = async () => {
@@ -75,7 +80,17 @@ const YourProfile: React.FC<booleanProps> = ({setRememberMeBtn}) => {
 
   
 
-
+  const ChangeValueProfile = async () => {
+    const userShure: boolean = await AscUser('are you sure?');
+  
+    if (userShure) {
+      setChangeUserValue(false);
+      ChangeUserData(formData.email, formData.name, formData.id);
+      setLoockNewData(!loockNewData);
+    } else {
+      setChangeUserValue(false);
+    }
+  };
 
   return (
     <>
@@ -125,11 +140,7 @@ const YourProfile: React.FC<booleanProps> = ({setRememberMeBtn}) => {
             <>
               <button
                 className={style.Button}
-                onClick={() => {
-                  setChangeUserValue(false);
-                  ChangeUserData(formData.email,formData.name,formData.id);
-                  setLoockNewData(!loockNewData)
-                }}
+                onClick={ChangeValueProfile}
               >
                 Save
               </button>

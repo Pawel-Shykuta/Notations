@@ -39,8 +39,8 @@ const Header: React.FC<HeaderProps> = ({ loockNewData,setRememberMeBtn}) => {
         <div className={Styles.Container}>
 
           <div className={Styles.ConSatings}>
-            <h1 className={Styles.Email}>{email || 'Loading...'}</h1>
             <h3 className={Styles.Logout} onClick={() => setSetingsOpen(!setingsOpen)}><FiSettings /></h3>
+            <h1 className={Styles.Email}>{email || 'Loading...'}</h1>
           </div>
 
           {setingsOpen?(

@@ -18,6 +18,7 @@ const Setings: React.FC<SetingsProps> = ({ setRememberMeBtn }) => {
         }
         localStorage.removeItem("email");
         localStorage.removeItem("password");
+        localStorage.setItem("rememberMe", JSON.stringify(false));
         navigate('/')
     }
 

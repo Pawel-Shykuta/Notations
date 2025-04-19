@@ -1,4 +1,4 @@
-/* Контейнер всей страницы */
+
 .previewContainer {
   display: flex;
   flex-direction: column;
@@ -7,10 +7,10 @@
   min-height: 100vh;
   background-color: #f9f9f9;
   padding: 20px;
-  gap: 40px; /* Добавим пространство между элементами */
+  gap: 40px; 
 }
 
-/* Фильтры */
+
 .filters {
   padding-top: 20px;
   width: 100%;
@@ -58,7 +58,7 @@
   outline: none;
 }
 
-/* Основной контентный блок */
+
 .previewContent {
   width: 100%;
   max-width: 800px;
@@ -69,7 +69,7 @@
   text-align: center;
 }
 
-/* Заголовок списка */
+
 .previewTitle {
   font-size: 2rem;
   color: #333;
@@ -77,21 +77,19 @@
   font-weight: 600;
 }
 
-/* Контейнер для списка элементов */
+
 .previewListContainer {
   display: flex;
   flex-direction: column;
-  gap: 25px; /* Добавляем больше расстояния между элементами */
+  gap: 25px; 
 }
 
-/* Список элементов */
 .previewList {
   display: flex;
   flex-direction: column;
   gap: 25px;
 }
 
-/* Каждый элемент списка */
 .previewListItem {
   background: #f4f4f4;
   padding: 20px;
@@ -101,8 +99,14 @@
   position: relative;
 }
 
-
-
+.previewListItem button{
+  width: 60%;
+  margin-top: 30px;
+  background-color: #8484e7;;
+}
+.previewListItem button:hover{
+  color: #23364e;
+}
 
 
 .previewDayLeft {
@@ -116,22 +120,22 @@
   margin-top: 5px;
 }
 
-/* Заголовок элемента */
+
 .previewItemTitle {
-  font-size: 1.5rem;
-  color: #111;
+  font-size: 2rem;
+  color: #2e1c1c;
   margin-bottom: 8px;
-  font-weight: 500;
+  font-weight: 700;
 }
 
-/* Обычный текст элемента */
+
 .previewItemText {
-  font-size: 1rem;
-  color: #555;
+  font-size: 1.3rem;
+  color: #383737;
   margin-bottom: 6px;
 }
 
-/* Текст при отсутствии информации */
+
 .previewNoInfo {
   font-size: 1.5rem;
   color: #888;
@@ -139,7 +143,7 @@
   font-weight: 500;
 }
 
-/* Блок изменения элемента */
+
 .ChangeBlock {
   width: 100%;
   height: auto;
@@ -151,37 +155,55 @@
   background-color: #f7f7f7;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: left; /* Выравниваем текст по левому краю */
+  text-align: left; 
 }
 
-/* Кнопки блока изменения */
+.ChangeBlock input{
+  width: 96%;
+}
+
 .ChangeBlock button {
-  margin-top: 15px;
-  width: 100%;
-  padding: 12px;
-  background-color: #4CAF50;
+  margin-top: 20px;
+  margin-left: 0px;
+  width: 60%;
+  margin-left: 20%;
+  padding: 14px 24px;
+  background-color: #8484e7;
   color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .ChangeBlock button:hover {
-  background-color: #45a049;
-  transform: translateY(-2px);
+  background-color: #34435a;
+  border-color: #cbd5e1;
+  color: rgb(49, 22, 22);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .ChangeBlock button:active {
-  transform: translateY(1px);
+  background-color: #dcdfe3;
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
 }
 
-/* Мобильная адаптация */
+.ChangeBlock button:focus-visible {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+}
+
+
 @media (max-width: 768px) {
   .filters {
     flex-direction: column;
-    gap: 15px; /* Уменьшаем промежуток */
+    gap: 15px; 
   }
 
   .filtersInputText, .selected {
@@ -233,10 +255,27 @@
   }
 
   .previewItemTitle {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+  }
+  .previewItemText{
+    width: 90%;
+    font-size: 1.3rem;
+    margin-left: 5%;
+    text-align: left;
+  }
+
+  h3.previewItemText{
+    font-size: 1.5rem;
+    text-align: center;
+    color: #04244b;
   }
 
   .previewListItem {
     padding: 15px;
   }
+
+  .ChangeBlock button{
+    margin-left: 0;
+  }
+
 }

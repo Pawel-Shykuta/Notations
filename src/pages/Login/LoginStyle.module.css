@@ -102,9 +102,10 @@ body {
 
   .remembeMe input{
     border: none;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     margin-left: -30px;
+    margin-top: 15px;
     cursor: pointer;
   }
 
@@ -137,16 +138,21 @@ body {
       padding: 10px;
       font-size: 14px;
     }
+
+    .remembeMe{
+      width: 90%;
+    }
+  
+    .remembeMe input{
+      border: none;
+      width: 20px;
+      height: 20px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
   }
 
 
-  .remembeMe input{
-    border: none;
-    width: 20px;
-    height: 20px;
-    margin-top: 10px;
-    cursor: pointer;
-  }
   
   @keyframes spin {
     0% {

@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import './App.css';
 import Login from './pages/Login/Login';
 import Registration from './pages/Reg/Registration';
@@ -17,7 +17,14 @@ export interface booleanProps {
 
 
 function App() {
-  const [rememberMeBtn,setRememberMeBtn] = useState<boolean>(false)
+  const [rememberMeBtn, setRememberMeBtn] = useState<boolean>(() => {
+    const saved = localStorage.getItem('rememberMe');
+    return saved ? JSON.parse(saved) : false;
+  });
+
+  useEffect(() => {
+    localStorage.setItem('rememberMe', JSON.stringify(rememberMeBtn));
+  }, [rememberMeBtn]);
 
 
   return (
