@@ -5,7 +5,7 @@ import Input from '../../components/Input/Input';
 import Button from '../../components/Button/Button';
 import Loader from '../../components/Loader/Loader';
 import { booleanProps } from '../../App';
-import { fetchUsersFromFirestore } from '../../services/Auntification/Auntification';
+import { LoockUser } from '../../services/Auntification/Auntification';
 
 export interface User {
   id: string,
@@ -40,7 +40,7 @@ const Login: React.FC<booleanProps> = ({ rememberMeBtn, setRememberMeBtn }) => {
 
   const BottonChange = async () => {
     setLoading(true);  
-    const isAuthenticated = await fetchUsersFromFirestore(regUser.email, regUser.password);
+    const isAuthenticated = await LoockUser(regUser.email, regUser.password);
 
     if (isAuthenticated) {
       navigate('/LoockFile');

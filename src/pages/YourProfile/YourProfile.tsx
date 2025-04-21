@@ -3,10 +3,10 @@ import style from './YourProfileStyle.module.css';
 import { infoUser } from '../../services/loadServices/loadInfoUser';
 import Header from '../../components/Header/Header';
 import {ChangeUserData} from '../../services/ChangeInfoUser/ChangeInfoUser'
+import {deleteUserCompletely} from'../../services/ChangeInfoUser/ChangeInfoUser'
 import {booleanProps} from'../../App'
-
-import Swal from 'sweetalert2';
 import {AscUser} from '../../components/AskWindow/AskWindow'
+import { useNavigate } from "react-router-dom";
 
 
 interface UserData {
@@ -24,6 +24,8 @@ interface EditableUserData {
 
 
 const YourProfile: React.FC<booleanProps> = ({setRememberMeBtn}) => {
+  const Navigate = useNavigate()
+
   const [data, setData] = useState<UserData | null>(null);
   const [ChangeteUserValue, setChangeUserValue] = useState<boolean>(false);
   const [formData, setFormData] = useState<EditableUserData>({ email: '',  name: '',id:'' });
@@ -79,18 +81,32 @@ const YourProfile: React.FC<booleanProps> = ({setRememberMeBtn}) => {
   };
 
   
-
   const ChangeValueProfile = async () => {
-    const userShure: boolean = await AscUser('are you sure?');
+    const confirmed = await AscUser('Are you sure?');
   
-    if (userShure) {
-      setChangeUserValue(false);
-      ChangeUserData(formData.email, formData.name, formData.id);
-      setLoockNewData(!loockNewData);
-    } else {
-      setChangeUserValue(false);
-    }
+    setChangeUserValue(false);
+  
+    if (!confirmed) return;
+  
+    await ChangeUserData(formData.email, formData.name, formData.id);
+    setLoockNewData(prev => !prev);
   };
+  
+
+  const DellAccaunt = async() =>{
+    const userShure: boolean = await AscUser('are you sure?');
+
+    setChangeUserValue(false); 
+
+    if(!userShure)return;
+
+      deleteUserCompletely(formData.id)
+      sessionStorage.clear()
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+      Navigate('/')
+      
+  }
 
   return (
     <>
@@ -145,7 +161,7 @@ const YourProfile: React.FC<booleanProps> = ({setRememberMeBtn}) => {
                 Save
               </button>
 
-              <button className={style.dellAcc} >
+              <button className={style.dellAcc} onClick={DellAccaunt}>
                 Del accaunt
               </button>
             </>

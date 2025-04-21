@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
 import style from './LoockEmail.module.css';
-import { addUserWithEmailAsId } from '../../services/Auntification/Auntification';
+import { AddUserToBd } from '../../services/Auntification/Auntification';
 import { useNavigate } from "react-router-dom";
 import emailjs from 'emailjs-com';
 import { v4 as uuidv4 } from 'uuid';
@@ -55,7 +55,7 @@ const LoockEmail: React.FC = () => {
     }
     if (userInputEmailPass === userInputPass || userInputEmailPass === newUserInputPass) {
       alert('Password is correct');
-      addUserWithEmailAsId( logUser.name,logUser.email,logUser.password)
+      AddUserToBd( logUser.name,logUser.email,logUser.password)
       navigate('/');
     }else {
       alert('Incorrect password');
